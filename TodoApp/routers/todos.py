@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, Path, Request
 from fastapi.templating import Jinja2Templates
 from starlette import status
-from starlette.responses import RedirectResponse
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
 from ..models import Todos
 from ..database import SessionLocal
@@ -43,6 +43,7 @@ def redirect_to_login():
         url="/auth/login-page", status_code=status.HTTP_302_FOUND
     )
     redirect_response.delete_cookie(key="access_token")
+    return redirect_response
 
 
 # #### PAGES ######
